@@ -68,9 +68,6 @@ if (Vector2Length(moveDir) > 0.f)
         };
         rotation = IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? -35.f : 0.f;
     }*/
-  // ================= GUN AIM & DRAW =================
-
-// ================= GUN AIM & DRAW (SCREEN SPACE) =================
 
 // player center in SCREEN space
 Vector2 playerScreenCenter = Vector2Add(
@@ -96,20 +93,22 @@ Rectangle source{
 };
 
 Vector2 gunOffset = {
-    6.f * scale,    // move gun forward (right)
+    4.f * scale,    // move gun forward (right)
    2.f * scale     // move gun UP (negative Y)
 };
+
+float gunScale = scale * 0.8f;  // gun size
 
 // gun destination (SCREEN SPACE)
 Rectangle dest{
     playerScreenCenter.x + gunOffset.x,
     playerScreenCenter.y + gunOffset.y,
-    TILE_SIZE * scale,
-    TILE_SIZE * scale
+    TILE_SIZE * gunScale,
+    TILE_SIZE * gunScale
 };
 
 Vector2 origin{
-    3.f * scale,                      // closer to grip
+    3.f * scale,    // closer to grip
     (TILE_SIZE * scale) / 2.f
 };
 
@@ -143,6 +142,7 @@ if ((IsMouseButtonPressed(MOUSE_LEFT_BUTTON) ) || IsKeyDown(KEY_B))
 
     // Vector2 dir = Vector2Subtract(mouseWorld, playerWorldCenter);
     //bullets.emplace_back(playerWorldCenter, dir);
+    
    bullets.emplace_back(playerWorldCenter, shootDir);
 
 
